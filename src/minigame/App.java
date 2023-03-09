@@ -24,10 +24,12 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import minigame.core.Game;
 import minigame.core.Util;
+import minigame.core.ai.AI;
 import minigame.core.ai.NoobAI;
 import minigame.core.ai.NormalAI;
 import minigame.core.players.AIPlayer;
 import minigame.core.players.LocalPlayer;
+import minigame.core.players.Player;
 import minigame.core.server.GhostServer;
 import minigame.core.server.LocalServer;
 import minigame.core.server.MainServer;
@@ -36,9 +38,10 @@ import minigame.ui.FXChessUI;
 import minigame.ui.Gui;
 import minigame.ui.MusicPlayer;
 
+import javax.swing.*;
 import java.awt.*;
+import java.awt.peer.DesktopPeer;
 import java.io.IOException;
-import java.net.URI;
 import java.net.URL;
 import java.util.HashMap;
 
@@ -64,7 +67,6 @@ public final class App extends Application {
     }
 
     public static Label l;//邀请码文本
-    private static Desktop desktop;
 
     /**
      * 状态标签，在游戏界面显示
@@ -163,19 +165,19 @@ public final class App extends Application {
     private void registerHandles(){
         getNodeById("button$ai").setOnMouseClicked(event -> {
             Server server=new LocalServer(Game.size);
-            String get=Gui.input("简单or困难? (选择前者输入1，选择后者输入2)");
-            if(get.equals("1"))
-                new AIPlayer(new NoobAI()).join(server);
-            else if (get.equals("2"))
-                new AIPlayer(new NormalAI()).join(server);
-            else {
-                Gui.info("请输入1或2!");
-                server=null;
-            }
+//            String get=Gui.input("简单or困难? (选择前者输入1，选择后者输入2)");
+//            if(get.equals("1"))
+//                new AIPlayer(new NoobAI()).join(server);
+//            else if (get.equals("2"))
+//                new AIPlayer(new NormalAI()).join(server);
+//            else {
+//                Gui.info("请输入1或2!");
+//                server=null;
+//            }
             Game.setServer(server);
-            FXChessUI.instance.setChess(server.getChess());  //这里可能会报空指针，不用管
+            FXChessUI.instance.setChess(server.getChess());
             Game.thePlayer.join(server);
-
+            new AIPlayer(new NormalAI()).join(server);
             setMode("game");
             if (Game.thePlayer.getId()==1){
                 state.setText("轮到您下了");
@@ -261,13 +263,13 @@ public final class App extends Application {
             Gui.info("设置成功！");
         });
         getMenuById("menu$github").setOnAction(event -> {
-            try {
-                if (Desktop.isDesktopSupported())
-                    desktop=Desktop.getDesktop();
-                    desktop.browse(new URI("https://github.com/BobbyWch/MiniGame"));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+//            try {
+//                System.out.println(Desktop.getDesktop().getClass().getDeclaredField("peer").getType().getName());
+//                Util.browse("https://github.com/BobbyWch/MiniGame");
+//            } catch (Exception e) {
+//                e.printStackTrace();
+                Gui.info("无法自动打开浏览器！\nGithub地址：https://github.com/BobbyWch/MiniGame");
+//            }
         });
     }
     public void setMode(String mode){
@@ -282,7 +284,6 @@ public final class App extends Application {
             default:
                 System.out.println("未知的mode？");
         }
-
     }
 
     /**

@@ -9,23 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0bea6f4a-c1e1-467d-adfb-7b7970f54f27" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MiniGame/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MiniGame/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MiniGame/res/img/splash" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/minigame/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/minigame/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/minigame/core/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/minigame/core/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/minigame/core/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/minigame/core/Util.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/minigame/core/net/Connection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/minigame/core/net/Connection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/minigame/core/players/AIPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/minigame/core/players/AIPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/minigame/core/server/LocalServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/minigame/core/server/LocalServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/minigame/core/server/MainServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/minigame/core/server/MainServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/minigame/core/server/RemoteServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/minigame/core/server/RemoteServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/minigame/ui/FXChessUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/minigame/ui/FXChessUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/minigame/ui/Gui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/minigame/ui/Gui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/minigame/ui/Listeners.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/minigame/ui/Listeners.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/minigame/ui/MusicPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/minigame/ui/MusicPlayer.java" afterDir="false" />
-    </list>
+    <list default="true" id="0bea6f4a-c1e1-467d-adfb-7b7970f54f27" name="Changes" comment="Changes" />
     <list id="722394fe-8781-4a14-a446-a3b2593b737a" name="Changes by YKJ6" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +58,7 @@
     <property name="TODO_SCOPE" value="All Places" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="codeWithMe.voiceChat.enabledByDefault" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
@@ -92,14 +76,7 @@
       <recent name="C:\Users\YKJ5\Documents\GitHub\MiniGame" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.JavaFX">
-    <configuration name="Client" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="minigame.test.Client" />
-      <module name="MiniGame" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager">
     <configuration name="JavaFX" type="Application" factoryName="Application" singleton="false">
       <option name="MAIN_CLASS_NAME" value="minigame.App" />
       <module name="MiniGame" />
@@ -107,26 +84,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MiniGame" type="Application" factoryName="Application" singleton="false" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="minigame.MiniGame" />
-      <module name="MiniGame" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Server" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="minigame.test.TestServer" />
-      <module name="MiniGame" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Application.Client" />
-      <item itemvalue="Application.JavaFX" />
-      <item itemvalue="Application.MiniGame" />
-      <item itemvalue="Application.Server" />
-    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -174,6 +131,7 @@
       <workItem from="1678335105735" duration="3074000" />
       <workItem from="1678356240651" duration="259000" />
       <workItem from="1678356516796" duration="2101000" />
+      <workItem from="1678369378511" duration="4277000" />
     </task>
     <servers />
   </component>

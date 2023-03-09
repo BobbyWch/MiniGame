@@ -1,9 +1,11 @@
 package minigame.core.server;
 
 import minigame.core.Chess;
+import minigame.core.Game;
 import minigame.core.ai.AI;
 import minigame.core.ai.NoobAI;
 import minigame.core.players.Player;
+import minigame.ui.Gui;
 
 public abstract class AbstractServer implements Server{
     protected Chess chess;
@@ -12,6 +14,8 @@ public abstract class AbstractServer implements Server{
      */
     protected int turn=1;
     private final AI innerAI=new NoobAI();
+
+    protected boolean gg=false;
 
     /**
      * 是否无棋可走
@@ -28,6 +32,14 @@ public abstract class AbstractServer implements Server{
             }
         }
         return result[1]>result[2]?1:(result[1]==result[2]?0:2);
+    }
+    protected void showGGMsg(){
+        int id=getWinner();
+        if (id==0){
+            Gui.info("游戏结束！平手");
+        }else {
+            Gui.info("游戏结束！"+ Game.IdMap[id]+"获胜");
+        }
     }
 
     @Override

@@ -97,10 +97,15 @@ public abstract class RemoteServer extends AbstractServer implements Runnable {
     }
     @Override
     public void step(Player player, int x, int y) {
+        if (gg) return;
         chess.set(x,y,player.getId());
         turn=3-player.getId();
         connection.writePacket(new StepPacket(x,y));
         checkState();
+        if (isFinished()){
+            showGGMsg();
+            gg=true;
+        }
     }
     protected void checkState(){
         if (turn== player.getId()){

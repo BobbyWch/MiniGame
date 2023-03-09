@@ -50,8 +50,10 @@ public final class MainServer extends RemoteServer{
                 }
                 Platform.runLater(()->Toolkit.getToolkit().getSystemClipboard().putContent(new Pair<>(DataFormat.PLAIN_TEXT,Util.zipAddress(ip,port))));
                 Gui.info("创建服务器成功！\n邀请码："+Util.zipAddress(ip,port)+"\n已复制到剪切板");
-                invite.setText(Util.zipAddress(ip,port));
-                invite.setFont(Font.font(17));
+                Platform.runLater(()->{
+                    invite.setText(Util.zipAddress(ip, port));
+                    invite.setFont(Font.font(17));
+                });
                 System.out.println("socket start at " + serverS.getLocalPort());
                 while (socket == null) {
                     if (serverS==null) return;
@@ -117,6 +119,10 @@ public final class MainServer extends RemoteServer{
             StepPacket stepPacket = (StepPacket) packet;
             chess.set(stepPacket.x, stepPacket.y, turn);
             turn=player.getId();
+            if (isFinished()){
+                showGGMsg();
+                gg=true;
+            }
         }
     }
 }

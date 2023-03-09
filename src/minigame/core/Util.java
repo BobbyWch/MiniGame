@@ -1,5 +1,8 @@
 package minigame.core;
 
+import java.io.IOException;
+import java.lang.reflect.Method;
+
 public class Util {
     private final static char[] charMap={'a','b','c','d','e','f','g','h','i','j','k','m','n','o','p',
             'q','r','s','t','u','v','w','x','y','z','A','B','C','D','E','F','G','H','I','J','K','L',
@@ -91,7 +94,16 @@ public class Util {
      * https://blog.csdn.net/xingbaozhen1210/article/details/81078101
      * @param url
      */
-    public static void browse(String url){
-
+    public static void browse(String url) throws Exception {
+        String os=System.getProperty("os.name","");
+        if (os.startsWith("Windows")){
+            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandle "+url);
+        }else if (os.startsWith("Mac OS")){
+            Class fmgr=Class.forName("com.apple.eio.FileManager");
+            Method open=fmgr.getDeclaredMethod("openURL",String.class);
+            open.invoke(null,url);
+        }else {//Linux不支持
+            throw new UnsupportedOperationException();
+        }
     }
 }

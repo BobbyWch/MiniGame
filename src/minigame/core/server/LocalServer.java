@@ -44,6 +44,7 @@ public final class LocalServer extends AbstractServer{
 
     @Override
     public void step(Player player,int x, int y) {
+        if (gg) return;
         chess.set(x,y,player.getId());
         if (++turn==3) turn=1;
         if (playerOnly){
@@ -62,12 +63,8 @@ public final class LocalServer extends AbstractServer{
             }
         }
         if (isFinished()){
-            int id=getWinner();
-            if (id==0){
-                Gui.info("游戏结束！平手");
-            }else {
-                Gui.info("游戏结束！"+Game.IdMap[id]+"获胜");
-            }
+            showGGMsg();
+            gg=true;
         }
     }
 }

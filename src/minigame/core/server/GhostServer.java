@@ -38,6 +38,10 @@ public final class GhostServer extends RemoteServer {
             StepPacket stepPacket = (StepPacket) packet;
             chess.set(stepPacket.x, stepPacket.y, turn);
             turn = player.getId();
+            if (isFinished()){
+                showGGMsg();
+                gg=true;
+            }
         }else if (packet instanceof InitPacket) {
             InitPacket initPacket = (InitPacket) packet;
             if (player == null) {
