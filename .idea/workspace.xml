@@ -9,7 +9,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0bea6f4a-c1e1-467d-adfb-7b7970f54f27" name="Changes" comment="Changes" />
+    <list default="true" id="0bea6f4a-c1e1-467d-adfb-7b7970f54f27" name="Changes" comment="Changes">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/MiniGame_jar/MiniGame.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/MiniGame_jar/MiniGame.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/MiniGame/res/fxml/test.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MiniGame/res/fxml/test.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minigame/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/minigame/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minigame/core/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/minigame/core/Util.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minigame/core/players/AIPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/minigame/core/players/AIPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minigame/core/server/AbstractServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/minigame/core/server/AbstractServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minigame/core/server/LocalServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/minigame/core/server/LocalServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minigame/ui/FXChessUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/minigame/ui/FXChessUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minigame/ui/IsListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/minigame/ui/IsListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minigame/ui/Listeners.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/minigame/ui/Listeners.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/minigame/ui/MusicPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/minigame/ui/MusicPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/res/fxml/test.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/res/fxml/test.fxml" afterDir="false" />
+    </list>
     <list id="722394fe-8781-4a14-a446-a3b2593b737a" name="Changes by YKJ6" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,6 +146,11 @@
       <workItem from="1678356240651" duration="259000" />
       <workItem from="1678356516796" duration="2101000" />
       <workItem from="1678369378511" duration="4277000" />
+      <workItem from="1678409308834" duration="807000" />
+      <workItem from="1678410425336" duration="659000" />
+      <workItem from="1678421604032" duration="2889000" />
+      <workItem from="1678429765259" duration="323000" />
+      <workItem from="1678430860841" duration="3683000" />
     </task>
     <servers />
   </component>

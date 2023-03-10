@@ -1,11 +1,14 @@
 package minigame.core.server;
 
+import minigame.App;
 import minigame.core.Chess;
 import minigame.core.Game;
 import minigame.core.ai.AI;
 import minigame.core.ai.NoobAI;
 import minigame.core.players.Player;
 import minigame.ui.Gui;
+
+import java.util.Arrays;
 
 public abstract class AbstractServer implements Server{
     protected Chess chess;
@@ -31,6 +34,8 @@ public abstract class AbstractServer implements Server{
                 result[data[i][j]]++;
             }
         }
+        System.out.println(Arrays.toString(result));
+        //noinspection ConstantConditions
         return result[1]>result[2]?1:(result[1]==result[2]?0:2);
     }
     protected void showGGMsg(){

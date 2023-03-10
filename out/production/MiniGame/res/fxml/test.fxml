@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Accordion?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -11,6 +10,7 @@
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
@@ -19,13 +19,19 @@
    <children>
       <Label layoutX="14.0" layoutY="29.0" prefHeight="38.0" prefWidth="343.0" text="在棋子间感受思维的碰撞！" wrapText="true">
          <font>
-            <Font name="Verdana" size="20.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
          <textFill>
-            <LinearGradient endX="1.0" endY="1.0" startX="1.0" startY="0.21153846153846154">
+            <LinearGradient endX="1.0" endY="1.0" startX="0.31155302307822486" startY="0.33275053940175026">
                <stops>
-                  <Stop color="#e08541" />
-                  <Stop color="WHITE" offset="1.0" />
+                  <Stop>
+                     <color>
+                        <Color red="0.8784313797950745" green="0.5215686559677124" blue="0.2549019753932953" />
+                     </color></Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.9368420839309692" green="0.06939571350812912" blue="0.06939571350812912" />
+                     </color></Stop>
                </stops>
             </LinearGradient>
          </textFill>
@@ -40,9 +46,9 @@
           </Menu>
         </menus>
       </MenuBar>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="210.0" layoutY="67.0" prefHeight="75.0" prefWidth="179.0" text="蓝 紫 棋" textFill="#0cefd1">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="190.0" layoutY="67.0" prefHeight="75.0" prefWidth="219.0" text="蓝 紫 棋" textFill="#ffeb2e">
          <font>
-            <Font name="System Bold" size="41.0" />
+            <Font name="System Bold" size="52.0" />
          </font>
          <effect>
             <ColorAdjust brightness="-0.06" contrast="-0.03" />
@@ -51,7 +57,7 @@
       <Accordion layoutX="256.0" layoutY="136.0" />
       <VBox alignment="CENTER" layoutX="229.0" layoutY="142.0" prefHeight="200.0" prefWidth="141.0" spacing="20.0">
          <children>
-          <Button fx:id="button$ai" mnemonicParsing="false" prefHeight="23.0" prefWidth="141.0" rotate="4.4" text="玩家 VS AI"/>
+          <Button fx:id="button$ai" mnemonicParsing="false" prefHeight="23.0" prefWidth="141.0" rotate="4.4" text="玩家 VS AI" />
             <Button fx:id="button$local" mnemonicParsing="false" prefHeight="23.0" prefWidth="141.0" rotate="-4.4" text="玩家 VS 玩家" />
             <Button fx:id="button$create" mnemonicParsing="false" prefHeight="23.0" prefWidth="141.0" rotate="4.4" text="创建联机服务器" />
             <Button fx:id="button$join" mnemonicParsing="false" prefHeight="23.0" prefWidth="141.0" rotate="-4.4" text="加入服务器" />

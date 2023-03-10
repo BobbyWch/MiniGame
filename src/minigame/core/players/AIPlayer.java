@@ -1,7 +1,6 @@
 package minigame.core.players;
 
 import minigame.core.ai.AI;
-import minigame.ui.Gui;
 
 /**
  * 电脑玩家

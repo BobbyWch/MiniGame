@@ -57,6 +57,7 @@ public final class FXChessUI extends Canvas{
 
     public void setChess(Chess chess){
         this.chess=chess;
+        lastX=lastY=pressY=pressX=-1;
         blockSize= (int) (getWidth()/chess.size);
         chess.setUI(this);
         reloadImage();

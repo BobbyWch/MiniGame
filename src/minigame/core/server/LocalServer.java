@@ -5,7 +5,6 @@ import minigame.core.Chess;
 import minigame.core.Game;
 import minigame.core.players.LocalPlayer;
 import minigame.core.players.Player;
-import minigame.ui.Gui;
 
 public final class LocalServer extends AbstractServer{
     private Player p1;

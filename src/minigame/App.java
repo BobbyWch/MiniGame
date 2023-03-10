@@ -1,6 +1,7 @@
 package minigame;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.EventTarget;
 import javafx.fxml.FXMLLoader;
@@ -9,39 +10,21 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import minigame.core.Game;
-import minigame.core.Util;
-import minigame.core.ai.AI;
-import minigame.core.ai.NoobAI;
-import minigame.core.ai.NormalAI;
-import minigame.core.players.AIPlayer;
-import minigame.core.players.LocalPlayer;
-import minigame.core.players.Player;
-import minigame.core.server.GhostServer;
-import minigame.core.server.LocalServer;
 import minigame.core.server.MainServer;
-import minigame.core.server.Server;
 import minigame.ui.FXChessUI;
-import minigame.ui.Gui;
-import minigame.ui.MusicPlayer;
+import minigame.ui.IsListener;
+import minigame.ui.Listeners;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.peer.DesktopPeer;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.URL;
 import java.util.HashMap;
 
@@ -51,8 +34,6 @@ public final class App extends Application {
      * 一个哈希表,相当于组件库,方便取用
      */
     public static final HashMap<String, EventTarget> map=new HashMap<>();
-
-    private int count=0;
     /**
      * 通过Id获取组件
      */
@@ -86,22 +67,28 @@ public final class App extends Application {
 
     public App() throws IOException {
         instance=this;
-
-        Parent root= FXMLLoader.load(getUrl("res/fxml/test.fxml"));
+        AnchorPane root= FXMLLoader.load(getUrl("res/fxml/test.fxml"));
         //注册id
         //在加载完所有fxml后调用
         regNodes(root);
+        root.setBackground(
+                new Background(new BackgroundImage(new Image(getUrl("res/img/background.jpg").openStream(),root.getPrefWidth(), root.getPrefHeight(),false,true),
+                        BackgroundRepeat.ROUND,BackgroundRepeat.ROUND,null,null)));
         state.setFont(Font.font(17));
         rootScene =new Scene(root);
         gameScene=new Scene(createGamePane());
-        registerHandles();
+        try {
+            regListeners();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
         look();
     }
     @Override
     public void start(Stage primaryStage) throws IOException {
         stage=primaryStage;
         primaryStage.getIcons().add(new Image(getUrl("res/img/icon.png").openStream()));
-        primaryStage.setTitle("MiniGame");
+        primaryStage.setTitle("蓝紫棋");
         primaryStage.setScene(rootScene);
         primaryStage.setResizable(false);
         primaryStage.show();
@@ -144,134 +131,17 @@ public final class App extends Application {
         for (Node node:parent.getChildrenUnmodifiable()) {
             if (node instanceof Parent) {
                 if (node instanceof MenuBar){
-                    MenuBar m = (MenuBar) node;
-                    for (Menu menu:m.getMenus()){
+                    for (Menu menu:((MenuBar) node).getMenus()){
                         for (MenuItem item:menu.getItems()){
-                            if (item.getId()!=null){
-                                map.put(item.getId(),item);
-                            }
+                            if (item.getId()!=null) map.put(item.getId(),item);
                         }
                     }
-                }else {
-                    regNodes(((Parent) node));
-                }
+                }else regNodes(((Parent) node));
             }
-            if (node.getId() != null) {
-                map.put(node.getId(), node);
-            }
+            if (node.getId() != null) map.put(node.getId(), node);
         }
     }
 
-    private void registerHandles(){
-        getNodeById("button$ai").setOnMouseClicked(event -> {
-            Server server=new LocalServer(Game.size);
-//            String get=Gui.input("简单or困难? (选择前者输入1，选择后者输入2)");
-//            if(get.equals("1"))
-//                new AIPlayer(new NoobAI()).join(server);
-//            else if (get.equals("2"))
-//                new AIPlayer(new NormalAI()).join(server);
-//            else {
-//                Gui.info("请输入1或2!");
-//                server=null;
-//            }
-            Game.setServer(server);
-            FXChessUI.instance.setChess(server.getChess());
-            Game.thePlayer.join(server);
-            new AIPlayer(new NormalAI()).join(server);
-            setMode("game");
-            if (Game.thePlayer.getId()==1){
-                state.setText("轮到您下了");
-            }
-        });
-        getNodeById("button$local").setOnMouseClicked(event -> {
-            Server server=new LocalServer(Game.size);
-            Game.setServer(server);
-            FXChessUI.instance.setChess(server.getChess());
-            Game.thePlayer.join(server);
-            new LocalPlayer().join(server);
-            setMode("game");
-        });
-        getNodeById("button$create").setOnMouseClicked(event -> {
-            MainServer server=new MainServer(Game.size);
-            Game.setServer(server);
-            FXChessUI.instance.setChess(server.getChess());
-            Game.thePlayer.join(server);
-            setMode("game");
-            l.setText("您的邀请码:");
-        });
-        getNodeById("button$join").setOnMouseClicked(event -> {
-            String get= Gui.input("请输入邀请码：");
-            if (get==null||get.equals("")) return;
-            try {
-                Object[] result=Util.unZipAddress(get);
-                GhostServer ghost=new GhostServer(((String) result[0]), ((Integer) result[1]));
-                Game.setServer(ghost);
-                Game.thePlayer.join(ghost);
-                System.out.println("join");
-                setMode("game");
-            }catch (IllegalArgumentException e){
-                Gui.info("无效的邀请码！");
-            }catch (IOException ioE){
-                Gui.info("无法连接至服务器");
-            }
-        });
-        getNodeById("button$tip").setOnMouseClicked(event -> {
-            NormalAI normalAI=new NormalAI();
-            if (count<5) {
-                int[] pos=normalAI.nextStep(Game.getServer().getChess(), Game.thePlayer.getId());
-                if (pos!=null){
-                    int p1=pos[0]+1;
-                    int p2=-pos[1]-1;
-                    //真实坐标(左上角0,0)
-                    Gui.info("AI建议你下"+p1+", "+ p2);
-                }
-            }
-            else Gui.info("您的试用次数已结束");
-            count+=1;
-        });
-        getNodeById("button$exit").setOnMouseClicked(event -> {
-            setMode("welcome");
-            Game.exit();
-        });  //返回主页面
-        getNodeById("button$radio").setOnMouseClicked(event -> {
-            RadioButton radioButton= (RadioButton) getNodeById("button$radio");
-            if (radioButton.isSelected()){
-                MusicPlayer.playBackground();
-            }else {
-                MusicPlayer.stopBgm();
-            }
-        });
-        getMenuById("menu$resize").setOnAction(event -> {
-            String input=Gui.input("请输入棋盘大小：（偶数）（4-20）\n当前棋盘大小："+Game.size);
-            if (input==null) return;
-            int size;
-            try {
-                size=Integer.parseInt(input);
-            }catch (NumberFormatException e){
-                Gui.info("请输入一个数字！");
-                return;
-            }
-            if (size%2==1){
-                Gui.info("请输入一个偶数！");
-                return;
-            }
-            if (size<4||size>20){
-                Gui.info("请输入一个4-20间的数");
-                return;
-            }
-            Game.size=size;
-            Gui.info("设置成功！");
-        });
-        getMenuById("menu$github").setOnAction(event -> {
-//            try {
-//                System.out.println(Desktop.getDesktop().getClass().getDeclaredField("peer").getType().getName());
-//                Util.browse("https://github.com/BobbyWch/MiniGame");
-//            } catch (Exception e) {
-//                e.printStackTrace();
-                Gui.info("无法自动打开浏览器！\nGithub地址：https://github.com/BobbyWch/MiniGame");
-//            }
-        });
-    }
     public void setMode(String mode){
         switch (mode){
             case "game":
@@ -309,6 +179,31 @@ public final class App extends Application {
         l=new EffectListener(local);
         local.addEventHandler(MouseEvent.MOUSE_ENTERED, l);
         local.addEventHandler(MouseEvent.MOUSE_EXITED, l);
+    }
+    @SuppressWarnings("unchecked")
+    private void regListeners() throws IllegalAccessException {
+        Field[] fields= Listeners.class.getFields();
+        IsListener annotation;
+        for (Field f:fields){
+            annotation=f.getAnnotation(IsListener.class);
+            if (annotation==null) continue;
+            switch (annotation.type()){
+                case "enter":
+                    getNodeById(annotation.id()).addEventHandler(MouseEvent.MOUSE_ENTERED, (EventHandler<MouseEvent>) f.get(null));
+                    break;
+                case "click":
+                    getNodeById(annotation.id()).addEventHandler(MouseEvent.MOUSE_CLICKED, (EventHandler<MouseEvent>) f.get(null));
+                    break;
+                case "exit":
+                    getNodeById(annotation.id()).addEventHandler(MouseEvent.MOUSE_EXITED, (EventHandler<MouseEvent>) f.get(null));
+                    break;
+                case "menu":
+                    getMenuById(annotation.id()).setOnAction((EventHandler<ActionEvent>) f.get(null));
+                    break;
+                default:
+                    throw new IllegalArgumentException("未知的annotation type？ "+annotation.type());
+            }
+        }
     }
     private static final class EffectListener implements EventHandler<MouseEvent>{
         private static final DropShadow shadow=new DropShadow();

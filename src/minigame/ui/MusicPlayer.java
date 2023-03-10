@@ -5,7 +5,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class MusicPlayer {
+public final class MusicPlayer {
     private static byte[] music=null;
     private static AudioFormat format;
     private static Thread bgmThread;

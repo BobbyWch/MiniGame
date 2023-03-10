@@ -1,6 +1,5 @@
 package minigame.core;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
 
 public class Util {
