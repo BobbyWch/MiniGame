@@ -22,6 +22,7 @@ import minigame.core.server.MainServer;
 import minigame.ui.FXChessUI;
 import minigame.ui.IsListener;
 import minigame.ui.Listeners;
+import minigame.ui.MusicPlayer;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -48,6 +49,7 @@ public final class App extends Application {
     }
 
     public static Label l;//邀请码文本
+    public static RadioButton radio=new RadioButton("播放音乐");
 
     /**
      * 状态标签，在游戏界面显示
@@ -204,6 +206,11 @@ public final class App extends Application {
                     throw new IllegalArgumentException("未知的annotation type？ "+annotation.type());
             }
         }
+        getNodeById("button$radio").setOnMouseClicked(event -> {
+            RadioButton radioButton=(RadioButton) getNodeById("button$radio");
+            if (radioButton.isSelected()) MusicPlayer.playBackground();
+            else MusicPlayer.stopBgm();
+        });
     }
     private static final class EffectListener implements EventHandler<MouseEvent>{
         private static final DropShadow shadow=new DropShadow();

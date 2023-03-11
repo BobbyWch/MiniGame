@@ -118,9 +118,11 @@ public final class Listeners {
             Game.exit();
         }
     };
-    @IsListener(id = "button$radio")
+    /**
+    //@IsListener(id = "button$radio")
+     * 无法监听事件，用普通方式注册
     public static final EventHandler<MouseEvent> radio = new EventHandler<MouseEvent>() {
-        @Override
+        //@Override
         public void handle(MouseEvent event) {
             RadioButton radioButton= (RadioButton) event.getTarget();
             if (radioButton.isSelected()){
@@ -130,6 +132,7 @@ public final class Listeners {
             }
         }
     };
+     */
     @IsListener(id = "menu$resize",type = "menu")//type为menu时，监听器必须为EventHandler<ActionEvent>
     public static final EventHandler<ActionEvent> resize = new EventHandler<ActionEvent>() {
         @Override
